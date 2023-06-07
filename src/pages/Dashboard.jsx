@@ -11,7 +11,10 @@ const Dashboard = () => {
     <>
       <UserContext.Provider value={[model, setModel, quantity, setQuantity]}>
         <div className="container">
+          {/* sidebar */}
           <Aside />
+
+          {/* dashboard  */}
           <Main />
         </div>
       </UserContext.Provider>

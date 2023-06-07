@@ -5,14 +5,18 @@ import jsonData from "../data";
 
 import { useContext } from "react";
 import UserContext from "../contexts/Model";
-import QuantityContext from "../contexts/Edit";
+// import QuantityContext from "../contexts/Edit";
 import Model from "./Model";
 
 const Main = () => {
   const [data, setData] = useState(jsonData);
-  const [model, setModel] = useContext(UserContext);
-  const [quantity, setQuantity] = useContext(QuantityContext);
+  const [sort, setSort] = useState(data);
+  const [reverse, setReverse] = useState(sort);
 
+  const [model, setModel] = useContext(UserContext);
+  // const [quantity, setQuantity] = useContext(QuantityContext);
+
+  //functionality for edit
   const handleModel = (quan, price) => {
     setModel("true");
   };
@@ -52,28 +56,29 @@ const Main = () => {
     }
   };
 
-
   // functionality for amount/price - low to high and high to low
   const handleAmount = (value) => {
     if (value === "Amount") {
       console.log(value);
-      setData(jsonData);
+      setSort(data);
     }
     if (value === "lowToHigh") {
-      let low = jsonData.sort((a, b) => a.price - b.price);
-      setData(low);
+      setSort((sort) => {
+        sort.sort((a, b) => a.price - b.price);
+      });
     }
-    // if (value === "highToLow") {
-    //   let htl = jsonData.sort((a, b) => a.price - b.price);
-    //   setData(htl.reverse());
-    // }
+
+    if (value === "highToLow") {
+      setReverse((reverse) => {
+        reverse.sort((a, b) => a.price - b.price).reverse();
+      });
+    }
   };
 
   return (
     <>
       {/* model  */}
       {model === "true" && <Model />}
-
 
       {/* main dashboard  */}
       <main className="main">
@@ -118,8 +123,9 @@ const Main = () => {
                 </th>
                 <th>
                   <select name="Placed-on">
-                    <option value="volvo">Placed on</option>
-                    <option value="volvo">Confirmed</option>
+                    <option value="placedon">Placed on</option>
+                    <option value="start">start</option>
+                    <option value="end">end</option>
                   </select>
                 </th>
                 <th>
