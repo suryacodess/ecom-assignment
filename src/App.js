@@ -3,7 +3,7 @@ import "../src/index.css";
 import Data from "./contexts/Data";
 import jsonData from "./data";
 import { useState } from "react";
-
+import "./index.css";
 function App() {
 
 
