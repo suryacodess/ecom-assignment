@@ -1,11 +1,18 @@
 import Dashboard from "./pages/Dashboard";
 import "../src/index.css";
+import Data from "./contexts/Data";
+import jsonData from "./data";
+import { useState } from "react";
 
 function App() {
+
+
+  const[data, setdata] = useState(jsonData);
+  
   return (
-    <div className="App">
+    <Data.Provider value={[data,setdata]}>
       <Dashboard />
-    </div>
+    </Data.Provider>
   );
 }
 

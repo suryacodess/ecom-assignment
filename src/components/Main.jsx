@@ -7,19 +7,14 @@ import { useContext } from "react";
 import UserContext from "../contexts/Model";
 // import QuantityContext from "../contexts/Edit";
 import Model from "./Model";
+import DataContext from "../contexts/Data";
 
 const Main = () => {
-  const [data, setData] = useState(jsonData);
-  const [sort, setSort] = useState(data);
-  const [reverse, setReverse] = useState(sort);
-
+  const [data, setData] = useContext(DataContext);
   const [model, setModel] = useContext(UserContext);
-  // const [quantity, setQuantity] = useContext(QuantityContext);
 
-  //functionality for edit
-  const handleModel = (quan, price) => {
-    setModel("true");
-  };
+  const [quan, setQuan] = useState();
+  const [price, setPrice] = useState();
 
   //functionality for active orders - active, delivered, pending, refund, and confirmed
   const handleInput = (value) => {
@@ -56,29 +51,32 @@ const Main = () => {
     }
   };
 
-  // functionality for amount/price - low to high and high to low
-  const handleAmount = (value) => {
-    if (value === "Amount") {
-      console.log(value);
-      setSort(data);
+  // functionality for amount/price filter - low to high and high to low
+  const handleAmount = (price) => {
+    if (price === "Amount") {
+      setData(jsonData);
     }
-    if (value === "lowToHigh") {
-      setSort((sort) => {
-        sort.sort((a, b) => a.price - b.price);
-      });
+    if (price === "lowToHigh") {
+      let low = [...data].sort((a, b) => a.price - b.price);
+      setData(low);
     }
+    if (price === "highToLow") {
+      let high = [...data].sort((a, b) => b.price - a.price);
+      setData(high);
+    }
+  };
 
-    if (value === "highToLow") {
-      setReverse((reverse) => {
-        reverse.sort((a, b) => a.price - b.price).reverse();
-      });
-    }
+  //functionality for edit
+  const handleModel = (quan, price) => {
+    setModel("true");
+    setQuan(quan);
+    setPrice(price);
   };
 
   return (
     <>
-      {/* model  */}
-      {model === "true" && <Model />}
+      {/* edit modal  */}
+      {model === "true" && <Model price={price} quan={quan} />}
 
       {/* main dashboard  */}
       <main className="main">

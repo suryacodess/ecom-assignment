@@ -1,5 +1,6 @@
 import React from "react";
 import "./sass/Header.css";
+import plusIcon from "../pngs/Plus.png";
 
 const Header = (props) => {
   return (
@@ -9,10 +10,13 @@ const Header = (props) => {
           <h2>{props.title}</h2>
         </div>
         <div className="add-order-btn">
-          <button>{props.button}</button>
+          <button>
+            <img src={plusIcon} />
+            {props.button}
+          </button>
         </div>
       </header>
-        <div className="divider"></div>
+      <div className="divider"></div>
     </>
   );
 };
