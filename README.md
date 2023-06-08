@@ -1,3 +1,15 @@
+# TO run the application in your local host - 
+- First clone this project or download the zip file from the github.
+- Install npm modules by using "npm i" command
+- then start the application using "npm start"
+
+## NOTE - ONLY FOR DESKSTOP VIEW.
+
+## App Structute
+- This application contains a dashboard page, with functionality such as active orders filter, 
+amount/price filter and a edit functionality.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
